@@ -86,7 +86,7 @@ app.get('/', (req, res) => {
     if (!isAuthenticated(req)) {
         return res.redirect('/login.html');
     }
-    res.sendFile(path.join(__dirname, 'views', 'index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 // Ruta para mostrar el formulario de login
@@ -157,6 +157,26 @@ app.post('/register', async (req, res) => {
 app.get('/logout', (req, res) => {
     req.session.destroy();
     res.redirect('/login.html');
+});
+
+// Rutas para el menu
+app.get('/pages/about.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'pages_menu', 'about.html'));
+});
+
+app.get('/pages/features.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'pages_menu', 'features.html'));
+});
+
+app.get('/pages/contact.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'pages_menu', 'contact.html'));
+});
+
+app.get('/pages/profile.html', (req, res) => {
+    if (!isAuthenticated(req)) {
+        return res.redirect('/login.html');
+    }
+    res.sendFile(path.join(__dirname, 'pages_menu', 'profile.html'));
 });
 
 // --- Iniciar el servidor ---
